@@ -1,4 +1,3 @@
-import './editCollection.scss'
 import { useEffect, useState } from 'react'
 import { Modal, ModalContent, Tab, Tabs } from '@heroui/react'
 import { Key } from '@react-types/shared'
@@ -7,7 +6,7 @@ import DetailsCollection from '@/components/collection/detailsCollection'
 import { UseDisclosureReturn } from "@heroui/use-disclosure";
 import useSessionStorage from '../../../shared/Utils/hooks/useSessionStorage'
 
-const EditCollection: React.FC<{ disclosure: UseDisclosureReturn, mode: 'properties' | 'details' | "", close: () => void }> = ({ disclosure, mode, close }) => {
+const ModalEditCollection: React.FC<{ disclosure: UseDisclosureReturn, mode: 'properties' | 'details' | "", close: () => void }> = ({ disclosure, mode, close }) => {
     const [selected, setSelected] = useState<Key>('properties')
     const [propsEnable, setPropsEnable] = useState(true)
     const [_, setStorage] = useSessionStorage('newCollection')
@@ -38,5 +37,5 @@ const EditCollection: React.FC<{ disclosure: UseDisclosureReturn, mode: 'propert
         </section >
     )
 }
-export default EditCollection;
+export default ModalEditCollection;
 

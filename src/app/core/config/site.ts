@@ -1,4 +1,4 @@
-import { scheme } from "@/types";
+import { PropertyValues, scheme } from "@/types";
 
 export type SiteConfig = typeof siteConfig;
 
@@ -6,6 +6,7 @@ export const siteConfig = {
 
 };
 
+//schemeTable tiene una copia
 export const fields = [
   { name: 'Text field', description: 'Simple short text', value: 'textField' },
   { name: 'Multiline', description: 'Text with multiple lines', value: 'multiline' },
@@ -130,5 +131,58 @@ export const collections: Array<scheme> = [
         },
       }
     }
+  },
+  {
+    description: "",
+    icon: "",
+    id: "nueva_coleccion",
+    name: "nueva coleccion",
+    path: "nueva_coleccion",
+    //view: "catalog",
+    properties: {
+      nombre: { name: "Nombre", slug: "nombre", description: "", url: "", datatype: "textField", properties: {} },
+      path: { name: "path", slug: "path", description: "", url: "", datatype: "url", properties: {} },
+      banner: {
+        datatype: "map",
+        description: "",
+        name: "Banner",
+        slug: "banner",
+        url: "",
+        properties: {
+          titulo: { datatype: "textField", name: "Titulo", slug: "titulo" },
+          slider: {
+            datatype: "list",
+            name: "Slider",
+            slug: "slider",
+            of: {
+              datatype: "map",
+              properties: {
+                descripcion: { datatype: "textField", name: "Descripcion", slug: "descripcion" },
+                imagen: { datatype: "url", name: "Imagen", slug: "imagen", url: "image" },
+              }
+            }
+          }
+        },
+      }
+    }
   }
 ]
+export const contentNew = [
+  {
+    nombre: "Prueba 1",
+    path: "prueba_1",
+    banner: {
+      titulo: "titulo 1",
+      slider: [
+        {
+          imagen: "imagen 1",
+          descripcion: "desc 1"
+        },
+        {
+          imagen: "imagen 2",
+          descripcion: "desc 2"
+        }
+      ]
+    }
+  }
+] as PropertyValues[]

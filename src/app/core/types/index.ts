@@ -35,6 +35,34 @@ export type property = {
       acceptedFiles: Array<string>,
       storagePath: string,
     },
+    value?: Array<string | Record<string, property>>
   }
   parent?: property
+  value?: string
+}
+
+export type PropertyValues = {
+  [x: string]: string | Array<string | PropertyValues> | PropertyValues;
+}
+
+export const parsePropertyValues = (properties: Record<string, property>, values: PropertyValues): Record<string, property> => {
+  let parseProperty: Record<string, property> = properties
+  for (let key in properties) {
+    if (properties[key].datatype === 'map' && Object.keys(values[key]).length > 0 && properties[key].properties) {
+      parseProperty[key].properties = parsePropertyValues(properties[key].properties, (values[key] as PropertyValues))
+    }
+    if (properties[key].datatype === 'list' && properties[key].of && Array.isArray(values[key])) {
+      parseProperty[key].of!.value = (values[key] as (string | PropertyValues)[]).map((e) => {
+        if (properties[key].of?.properties && Object.keys(e).length > 0 ) {
+          return parsePropertyValues(properties[key].of.properties, (e as PropertyValues))
+        }
+        if (typeof e === "string") return e
+        return ""
+      })
+    }
+    else {
+      parseProperty[key].value = values[key] as string
+    }
+  }
+  return parseProperty
 }

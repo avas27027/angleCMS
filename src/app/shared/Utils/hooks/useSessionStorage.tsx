@@ -1,3 +1,4 @@
+import { scheme } from "@/types";
 import { useSyncExternalStore } from "react";
 
 const useSessionStorage = (storageName: 'newCollection' | 'collections') => {
@@ -19,7 +20,7 @@ const useSessionStorage = (storageName: 'newCollection' | 'collections') => {
         window.dispatchEvent(new StorageEvent("custom-storage-event-name"));
     };
 
-    return [value, setValue] as const;
+    return [value as scheme | scheme[], setValue] as const;
 };
 
 function subscribe(callback: () => void) {

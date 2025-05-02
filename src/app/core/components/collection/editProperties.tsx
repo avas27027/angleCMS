@@ -30,7 +30,7 @@ function deleteKey(property: property) {
 const EditProperties: React.FC<{ close: () => void }> = ({ close }) => {
     const [storage, setStorage] = useSessionStorage('newCollection')
     const [storageCollections, setStorageCollections] = useSessionStorage('collections')
-    const newCollection: scheme = storage ? storage : { name: 'Collection Name', path: 'collectionName', description: "", icon: "" }
+    const newCollection: scheme = storage ? storage as scheme : { name: 'Collection Name', path: 'collectionName', description: "", icon: "" }
 
     const [selectProperty, setSelectProperty] = useState<property>()
     const [properties, setProperties] = useState<Record<string, property> | undefined>(newCollection.properties)
@@ -92,7 +92,7 @@ const EditProperties: React.FC<{ close: () => void }> = ({ close }) => {
         newCollection.properties = orfanProperty
 
         // Se agrega la nueva coleccion al session storage
-        const collections: Array<scheme> = storageCollections ? storageCollections : []
+        const collections: Array<scheme> = storageCollections ? storageCollections as scheme[] : []
         setStorageCollections([...collections, newCollection])
 
         // Se reinician los valores de la coleccion

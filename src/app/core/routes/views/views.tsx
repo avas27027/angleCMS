@@ -5,7 +5,7 @@ import { FaArrowRight, FaTrash } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { Link } from "@heroui/link";
 import { useDisclosure } from "@heroui/react";
-import EditCollection from "../editCollection/editCollection";
+import ModalEditCollection from "../../components/modals/modalEditCollection";
 import { useEffect, useState } from "react";
 import { scheme } from "@/types";
 import useSessionStorage from "../../../shared/Utils/hooks/useSessionStorage";
@@ -16,6 +16,7 @@ export default function Views() {
   // Se agrega las colecciones de la BD a el session storage
   useEffect(() => {
     setStorageValue(collections)
+    setStorage({})
   }, [])
 
   const modal = useDisclosure()
@@ -49,7 +50,7 @@ export default function Views() {
           </div>
         </div>
       </section>
-      <EditCollection {...{ disclosure: modal, mode, close: closeHandler }} />
+      <ModalEditCollection {...{ disclosure: modal, mode, close: closeHandler }} />
     </DefaultLayout>
   )
 }

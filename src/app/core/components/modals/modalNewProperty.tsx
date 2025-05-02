@@ -79,7 +79,7 @@ const ModalNewProperty: React.FC<{ mode: string, callback: (mode: string, proper
                                         <div>
                                             <BsFillCollectionFill />
                                             <Card isPressable onPress={() => {
-                                                callback('edit', { name: '', slug: '', parent: state, datatype: state.of!.datatype, ...state.of })
+                                                callback('edit', { name: '', slug: '', parent: state, datatype: state.of!.datatype, ...state.of, value: undefined })
                                             }}>
                                                 <CardHeader><h3>{state.of.datatype}</h3></CardHeader>
                                             </Card>
